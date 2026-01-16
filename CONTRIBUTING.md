@@ -2,9 +2,10 @@
 
 ## Local preview
 
+First install [mdbook](https://rust-lang.github.io/mdBook/guide/installation.html), [uv](https://docs.astral.sh/uv/#installation), [just](https://just.systems/man/en/), and rust toolchains, then run:
+
 ```shell
-uv run download.py
-mdbook serve
+just serve --open
 ```
 
-The first command downloads book sources from GitHub. If you encounter a network error, usually waiting for a few seconds and then retrying will solve the problem.
+It will call `just download` to download book sources from GitHub. If you encounter a network error, usually waiting for a few seconds and then retrying will solve the problem.

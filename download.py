@@ -1,5 +1,6 @@
-"""Download book sources from GitHub and generate SUMMARY.md."""
+"""Download book sources from GitHub and generate SUMMARY.md and meta.json."""
 
+import json
 import logging
 from collections import deque
 from pathlib import Path
@@ -26,11 +27,17 @@ legal_dir = src_dir / "license"
 legal_files: deque[tuple[str, Path]] = deque()
 """Legal files `[(src_url, dst_path)]` to be downloaded in the end."""
 
+meta_map: dict[str, str] = {}
+"""A mapping from file paths to source URLs."""
+
 
 def download(src_url: str, dst_path: Path, /, *, title: str, level: Literal[0, 1] = 1) -> None:
     """Download a file from a given URL (if not already downloaded), and append the entry to SUMMARY.md."""
     dst_short = dst_path.relative_to(src_dir).as_posix()
     summary.append(f"{'  ' * level}- [{title}](./{dst_short})")
+
+    assert dst_short not in meta_map, f"Duplicate entry for {dst_short}"
+    meta_map[dst_short] = src_url.replace("/raw/", "/blob/")
 
     if dst_path.exists():
         logger.info(f"Skip downloading {dst_short}, already exists")
@@ -118,3 +125,4 @@ if __name__ == "__main__":
         download(src_url, dst_path, title=f"{dst_path.parent.name.title()}: {dst_path.stem}")
 
     (src_dir / "SUMMARY.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
+    (src_dir / "meta.json").write_text(json.dumps({"map": meta_map}, ensure_ascii=False), encoding="utf-8")

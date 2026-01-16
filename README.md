@@ -21,4 +21,4 @@ They exist in [Typst's official GitHub repositories (github.com/typst)](https://
 
 - Remap URLs like https://github.com/typst/hayagriva/blob/main/docs/selectors.md
 - Highlight typst code blocks
-- Link to the original file on each page and add the date of the last update
+- Add the date of the last update

@@ -7,3 +7,6 @@ language = "en"
 [output.html.search.chapter]
 # Disables search indexing for licenses
 "license" = { enable = false }
+
+[preprocessor.typst-extra-docs]
+command = "cargo run --release --manifest-path ./typst-extra-docs/Cargo.toml"

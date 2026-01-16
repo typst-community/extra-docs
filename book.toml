@@ -1,0 +1,9 @@
+[book]
+title = "Typst Extra Docs"
+authors = []
+description = "An unofficial collection of extra official documentations for Typst."
+language = "en"
+
+[output.html.search.chapter]
+# Disables search indexing for licenses
+"license" = { enable = false }

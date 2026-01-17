@@ -16,6 +16,17 @@ check:
     ruff check
     cargo clippy {{ manifest }}
 
+# Run tests
+[group("dev")]
+test:
+    cargo test {{ manifest }}
+
+# Run ripgrep
+[group("dev")]
+[no-cd]
+rg PATTERN *ARGS:
+    rg --no-ignore-vcs --glob=!meta.json {{ quote(PATTERN) }} {{ ARGS }}
+
 # Download book sources from GitHub (Please rerun if you meet any network error.)
 download:
     uv run download.py

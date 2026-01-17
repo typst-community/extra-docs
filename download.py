@@ -48,7 +48,14 @@ def download(src_url: str, dst_path: Path, /, *, title: str, level: Literal[0, 1
 
         r = client.get(src_url, follow_redirects=True)
         r.raise_for_status()
-        dst_path.write_text(r.text, encoding="utf-8")
+        dst_path.write_text(normalize_markdown(r.text), encoding="utf-8")
+
+
+def normalize_markdown(content: str) -> str:
+    """Ad hoc normalization for https://docs.rs/pulldown-cmark-to-cmark"""
+    # For https://github.com/typst/packages/blob/09e558d2b8a5342dc6c273e6ec85eb2da1c47b44/docs/manifest.md?plain=1#L195-L196
+    # pulldown-cmark can recognize it, but pulldown-cmark-to-cmark will collapse `[local packages]: …` to `[localpackages]: …` without this normalization.
+    return content.replace("[local\n  packages]", "[local packages]")
 
 
 def download_typst(repo, /) -> None:

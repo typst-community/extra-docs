@@ -19,6 +19,5 @@ They exist in [Typst's official GitHub repositories (github.com/typst)](https://
 
 ## TODO
 
-- Remap URLs like https://github.com/typst/hayagriva/blob/main/docs/selectors.md
 - Highlight typst code blocks
 - Add the date of the last update

@@ -20,4 +20,3 @@ They exist in [Typst's official GitHub repositories (github.com/typst)](https://
 ## TODO
 
 - Highlight typst code blocks
-- Add the date of the last update

@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fs::File;
 use std::path::PathBuf;
 
@@ -24,7 +25,9 @@ impl ExtraDocs {
 #[derive(serde::Deserialize)]
 struct Metadata {
     /// A mapping from file paths to source URLs.
-    map: std::collections::HashMap<PathBuf, String>,
+    map: HashMap<PathBuf, String>,
+    /// A mapping from source URL prefixes to author dates.
+    dates: HashMap<String, String>,
 }
 
 impl Preprocessor for ExtraDocs {
@@ -39,7 +42,7 @@ impl Preprocessor for ExtraDocs {
             eprintln!("Failed to open {:?}: {e:?}", &meta);
         })?)?;
 
-        let remapper = Remapper::new(&meta);
+        let remapper = Remapper::new(&meta.map);
 
         book.for_each_chapter_mut(|chapter| {
             let Some(file) = &chapter.source_path else {
@@ -58,7 +61,16 @@ impl Preprocessor for ExtraDocs {
             }
 
             // Add the notice after remapping, because links in the notice should not be remapped.
-            chapter.content = add_source_notice(&chapter.content, source_url);
+            let author_date = meta
+                .dates
+                .iter()
+                .find_map(|(prefix, author_date)| {
+                    source_url.starts_with(prefix).then_some(author_date)
+                })
+                .unwrap_or_else(|| {
+                    panic!("No matching author date found for source URL: {source_url}");
+                });
+            chapter.content = add_source_notice(&chapter.content, source_url, author_date);
         });
 
         Ok(book)
@@ -70,10 +82,10 @@ impl Preprocessor for ExtraDocs {
 }
 
 /// Add a source URL notice to the chapter and return the new content.
-fn add_source_notice(chapter_content: &str, source_url: &str) -> String {
+fn add_source_notice(chapter_content: &str, source_url: &str, author_date: &str) -> String {
     format!(
         r#"> [!NOTE]
-> This is an _unofficial_ copy of [the file in Typst's official repository]({source_url}).
+> This is an _unofficial_ copy of [the file in Typst's official repository]({source_url}) as of {author_date}.
 
 {}"#,
         chapter_content

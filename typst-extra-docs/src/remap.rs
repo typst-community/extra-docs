@@ -6,8 +6,6 @@ use std::{
 use mdbook_markdown::pulldown_cmark::CowStr;
 use url::Url;
 
-use crate::Metadata;
-
 pub struct Remapper {
     /// Map from `main` URLs to files.
     url_to_file: HashMap<String, PathBuf>,
@@ -16,11 +14,11 @@ pub struct Remapper {
 }
 
 impl Remapper {
-    pub fn new(meta: &Metadata) -> Self {
+    pub fn new(meta_map: &HashMap<PathBuf, String>) -> Self {
         let mut url_to_file = HashMap::new();
         let mut file_to_url = HashMap::new();
 
-        for (file, url_str) in &meta.map {
+        for (file, url_str) in meta_map {
             let url = Url::parse(url_str).expect("valid URL");
 
             url_to_file.insert(as_main(&url).to_string(), file.clone());
@@ -202,8 +200,7 @@ mod tests {
   "license/typst/LICENSE": "https://github.com/typst/typst/blob/701c7f9b2853857cde6f4dd76763b9bb118aff14/LICENSE"
 }"#;
         let map = serde_json::from_str(map).unwrap();
-        let meta = Metadata { map };
-        Remapper::new(&meta)
+        Remapper::new(&map)
     }
 
     #[test]

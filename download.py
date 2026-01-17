@@ -2,7 +2,9 @@
 
 import json
 import logging
+import tomllib
 from collections import deque
+from datetime import UTC, date, datetime
 from pathlib import Path
 from shutil import copyfile
 from typing import Literal
@@ -114,22 +116,54 @@ def download_packages(repo, /) -> None:
         legal_files.append((f"{repo}/{f}", legal_dir / "packages" / f))
 
 
+def load_versions() -> dict[Literal["typst", "codex", "hayagriva", "packages"], tuple[date, str]]:
+    """Load `repo_name => (author_date, repo_url_base)` from book.toml."""
+
+    book_toml = src_dir.parent / "book.toml"
+    with book_toml.open("rb") as f:
+        config = tomllib.load(f)["preprocessor"]["typst-extra-docs"]["download"]
+
+    result = {}
+
+    for k, v in config.items():
+        commit_hash, author_date_str = v.split(" ", 1)
+        author_date = datetime.fromisoformat(author_date_str).astimezone(UTC).date()
+        repo_url_base = f"https://github.com/typst/{k}/raw/{commit_hash}"
+        result[k] = (author_date, repo_url_base)
+
+    return result
+
+
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,
         format="\033[1;32m%(asctime)s\033[0m - \033[1;34m%(levelname)s\033[0m - %(message)s",
     )
 
+    versions = load_versions()
+
     copyfile(src_dir.parent / "README.md", src_dir / "index.md")
 
-    download_typst("https://github.com/typst/typst/raw/701c7f9b2853857cde6f4dd76763b9bb118aff14")
-    download_codex("https://github.com/typst/codex/raw/cd6d10d732673c27a97b6a42dc1774620a1717cf")
-    download_hayagriva("https://github.com/typst/hayagriva/raw/a137441413a5907c15ced44d1502dfb9fa1a3014")
-    download_packages("https://github.com/typst/packages/raw/8f21d920ae6389359e4734335a107cca0f57c181")
+    download_typst(versions["typst"][1])
+    download_codex(versions["codex"][1])
+    download_hayagriva(versions["hayagriva"][1])
+    download_packages(versions["packages"][1])
 
     summary.append("- [Licenses](./licenses.md)")
     for src_url, dst_path in legal_files:
-        download(src_url, dst_path, title=f"{dst_path.parent.name.title()}: {dst_path.stem}")
+        download(src_url, dst_path.with_suffix(".md"), title=f"{dst_path.parent.name.title()}: {dst_path.stem}")
 
     (src_dir / "SUMMARY.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
-    (src_dir / "meta.json").write_text(json.dumps({"map": meta_map}, ensure_ascii=False), encoding="utf-8")
+    (src_dir / "meta.json").write_text(
+        json.dumps(
+            {
+                "dates": {
+                    repo.replace("/raw/", "/blob/"): author_date.isoformat()
+                    for (author_date, repo) in versions.values()
+                },
+                "map": meta_map,
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )

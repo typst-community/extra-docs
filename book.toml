@@ -8,6 +8,15 @@ language = "en"
 # Disables search indexing for licenses
 "license" = { enable = false }
 
+[preprocessor.typst-highlight]
+# https://github.com/YDX-2147483647/mdbook-typst-highlight/tree/up
+# That's a fork of https://github.com/sitandr/mdbook-typst-highlight
+command = "cargo run --release --manifest-path ../mdbook-typst-highlight/Cargo.toml"
+# Inline highlighting must be disabled due to technical limitations.
+# This preprocessor highlights inline codes by converting them to HTML fragments in markdown.
+# However, special characters (e.g., `_*|`) in them are not properly escaped, resulting in poor rendering.
+disable_inline = true
+
 [preprocessor.typst-extra-docs]
 command = "cargo run --release --manifest-path ./typst-extra-docs/Cargo.toml"
 

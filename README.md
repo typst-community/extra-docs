@@ -16,7 +16,3 @@ They exist in [Typst's official GitHub repositories (github.com/typst)](https://
   - [Typst 日本語ドキュメント](https://typst-jp.github.io/docs/)
   - [Typst 中文社区导航](https://typst.dev/guide/)
   - …
-
-## TODO
-
-- Highlight typst code blocks

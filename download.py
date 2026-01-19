@@ -105,7 +105,7 @@ def download_packages(repo, /) -> None:
         ("typst.md", "Typst files"),
         ("resources.md", "Images, fonts and other assets"),
         ("documentation.md", "The README file, and documentation in general"),
-        ("licensing.md", "Licensing"),
+        ("licensing.md", "Licensing your package"),
         ("tips.md", "Further tips"),
         ("CATEGORIES.md", "List of categories"),
         ("DISCIPLINES.md", "List of disciplines"),

@@ -9,7 +9,8 @@ language = "en"
 "license" = { enable = false }
 
 [preprocessor.typst-highlight]
-# https://github.com/YDX-2147483647/mdbook-typst-highlight/tree/up
+# https://github.com/sicikh/mdbook-typst-highlight/tree/06056f4759bc7191f0cdec30473b2d2299d6038d
+# https://github.com/sitandr/mdbook-typst-highlight/pull/3
 # That's a fork of https://github.com/sitandr/mdbook-typst-highlight
 command = "cargo run --release --manifest-path ../mdbook-typst-highlight/Cargo.toml"
 # Inline highlighting must be disabled due to technical limitations.

@@ -9,10 +9,12 @@ language = "en"
 "license" = { enable = false }
 
 [preprocessor.typst-highlight]
+# Install it by running
+#   cargo install --git https://github.com/sicikh/mdbook-typst-highlight --branch upgrade-mdbook-0.5.2
 # https://github.com/sicikh/mdbook-typst-highlight/tree/06056f4759bc7191f0cdec30473b2d2299d6038d
 # https://github.com/sitandr/mdbook-typst-highlight/pull/3
 # That's a fork of https://github.com/sitandr/mdbook-typst-highlight
-command = "cargo run --release --manifest-path ../mdbook-typst-highlight/Cargo.toml"
+
 # Inline highlighting must be disabled due to technical limitations.
 # This preprocessor highlights inline codes by converting them to HTML fragments in markdown.
 # However, special characters (e.g., `_*|`) in them are not properly escaped, resulting in poor rendering.

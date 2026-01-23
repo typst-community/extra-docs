@@ -1,8 +1,10 @@
 # Typst Extra Docs
 
-This is an _unofficial_ collection of extra official documentations for Typst to help reading and searching.
+This is an _unofficial_ collection of extra official documentations for Typst.
 
-They exist in [Typst's official GitHub repositories (github.com/typst)](https://github.com/orgs/typst/repositories?type=source&q=mirror%3Afalse+fork%3Afalse+archived%3Afalse), but are missing in the official [Typst Documentation (typst.app/docs)](https://typst.app/docs/).
+- [Typst's official GitHub repositories (github.com/typst)](https://github.com/orgs/typst/repositories?type=source&q=mirror%3Afalse+fork%3Afalse+archived%3Afalse) contain some files that are missing in the official [Typst Documentation (typst.app/docs)](https://typst.app/docs/). These files are collected here to help reading and searching.
+
+- [Snapshots of the official Typst Documentation](./zim/index.md) are also stored here, for reading offline or using previous versions.
 
 ## See also
 

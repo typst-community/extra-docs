@@ -145,6 +145,7 @@ if __name__ == "__main__":
     copyfile(src_dir.parent / "README.md", src_dir / "index.md")
 
     download_typst(versions["typst"][1])
+    summary.append("  - [Snapshots of docs](./zim/index.md)")
     download_codex(versions["codex"][1])
     download_hayagriva(versions["hayagriva"][1])
     download_packages(versions["packages"][1])

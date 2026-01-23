@@ -5,4 +5,5 @@
 /src/meta.json
 /src/**/*.md
 !/src/licenses.md
+!/src/zim/index.md
 !/src/**/*.prelude.md

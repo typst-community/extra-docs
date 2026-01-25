@@ -6,7 +6,6 @@ import tomllib
 from collections import deque
 from datetime import UTC, date, datetime
 from pathlib import Path
-from shutil import copyfile
 from typing import Literal
 
 import httpx
@@ -142,7 +141,10 @@ if __name__ == "__main__":
 
     versions = load_versions()
 
-    copyfile(src_dir.parent / "README.md", src_dir / "index.md")
+    (src_dir / "index.md").write_text(
+        (src_dir.parent / "README.md").read_text(encoding="utf-8").replace("](./src/", "](./"),
+        encoding="utf-8",
+    )
 
     download_typst(versions["typst"][1])
     summary.append("  - [Snapshots of docs](./zim/index.md)")

@@ -22,4 +22,3 @@ Kiwix is also available on other browsers, desktop computers, mobile devices, an
 - [typst-docs-web](https://typst-docs-web.netlify.app/) hosts multiple versions of the Typst documentation, but in an alternative layout and with full-text search.
 
 - [🏗 Documentation infrastructure — Best of Typst (TCDM)](https://ydx-2147483647.github.io/best-of-typst/#docs-infra) lists more tools for building the Typst documentation.
-

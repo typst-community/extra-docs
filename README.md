@@ -1,10 +1,12 @@
 # Typst Extra Docs
 
+[![GitHub repo size](https://img.shields.io/github/repo-size/YDX-2147483647/typst-extra-docs)](https://github.com/YDX-2147483647/typst-extra-docs)
+
 This is an _unofficial_ collection of extra official documentations for Typst.
 
 - [Typst's official GitHub repositories (github.com/typst)](https://github.com/orgs/typst/repositories?type=source&q=mirror%3Afalse+fork%3Afalse+archived%3Afalse) contain some files that are missing in the official [Typst Documentation (typst.app/docs)](https://typst.app/docs/). These files are collected here to help reading and searching.
 
-- [Snapshots of the official Typst Documentation](./zim/index.md) are also stored here, for reading offline or using previous versions.
+- [Snapshots of the official Typst Documentation](./src/zim/index.md) are also stored here, for reading offline or using previous versions.
 
 ## See also
 
@@ -18,3 +20,9 @@ This is an _unofficial_ collection of extra official documentations for Typst.
   - [Typst 日本語ドキュメント](https://typst-jp.github.io/docs/)
   - [Typst 中文社区导航](https://typst.dev/guide/)
   - …
+
+## License
+
+Files from the official Typst repositories are licensed under [their respective licenses](./src/licenses.md).
+
+Other files to build this website are licensed as [MIT](https://choosealicense.com/licenses/mit/).

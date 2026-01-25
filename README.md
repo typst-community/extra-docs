@@ -1,6 +1,6 @@
 # Typst Extra Docs
 
-[![GitHub repo size](https://img.shields.io/github/repo-size/YDX-2147483647/typst-extra-docs)](https://github.com/YDX-2147483647/typst-extra-docs)
+[![GitHub repo size](https://img.shields.io/github/repo-size/typst-community/extra-docs)](https://github.com/typst-community/extra-docs)
 
 This is an _unofficial_ collection of extra official documentations for Typst.
 

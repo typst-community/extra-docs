@@ -73,6 +73,7 @@ def download_codex(repo, /) -> None:
     codex = src_dir / "codex"
 
     download(f"{repo}/README.md", codex / "index.md", title="Codex", level=0)
+    download(f"{repo}/CONTRIBUTING.md", codex / "contributing.md", title="Contributing guidelines")
     download(f"{repo}/CHANGELOG.md", codex / "changelog.md", title="Changelog")
 
     for f in ["LICENSE"]:

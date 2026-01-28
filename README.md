@@ -26,3 +26,4 @@ This is an _unofficial_ collection of extra official documentations for Typst.
 Files from the official Typst repositories are licensed under [their respective licenses](./src/licenses.md).
 
 Other files to build this website are licensed as [MIT](https://choosealicense.com/licenses/mit/).
+They live in the [GitHub repository typst-community/extra-docs](https://github.com/typst-community/extra-docs).

@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 import tomllib
 from collections import deque
 from datetime import UTC, date, datetime
@@ -49,14 +50,28 @@ def download(src_url: str, dst_path: Path, /, *, title: str, level: Literal[0, 1
 
         r = client.get(src_url, follow_redirects=True)
         r.raise_for_status()
-        dst_path.write_text(normalize_markdown(r.text), encoding="utf-8")
+        dst_path.write_text(
+            normalize_markdown(
+                r.text,
+                # NOTICE files are not really markdown
+                tolerant=dst_path.stem == "NOTICE",
+            ),
+            encoding="utf-8",
+        )
 
 
-def normalize_markdown(content: str) -> str:
+def normalize_markdown(content: str, *, tolerant=False) -> str:
     """Ad hoc normalization for https://docs.rs/pulldown-cmark-to-cmark"""
+
     # For https://github.com/typst/packages/blob/09e558d2b8a5342dc6c273e6ec85eb2da1c47b44/docs/manifest.md?plain=1#L195-L196
     # pulldown-cmark can recognize it, but pulldown-cmark-to-cmark will collapse `[local packages]: …` to `[localpackages]: …` without this normalization.
-    return content.replace("[local\n  packages]", "[local packages]")
+    content = content.replace("[local\n  packages]", "[local packages]")
+
+    if tolerant:
+        # Treat `===` as `<hr>` rather than heading markers.
+        content = re.sub(r"^={5,}$", "\n---\n", content, flags=re.MULTILINE)
+
+    return content
 
 
 def download_typst(repo, /) -> None:

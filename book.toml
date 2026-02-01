@@ -8,6 +8,10 @@ language = "en"
 # Disables search indexing for licenses
 "license" = { enable = false }
 
+[output.html.playground]
+# hayagriva/index.md contains rust codes, but the Rust Playground does not support the hayagriva crate
+runnable = false
+
 [preprocessor.typst-highlight]
 # Install it by running
 #   cargo install --git https://github.com/sicikh/mdbook-typst-highlight --branch upgrade-mdbook-0.5.2

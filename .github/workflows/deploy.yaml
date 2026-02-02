@@ -24,10 +24,15 @@ jobs:
       - name: Install mdbook-typst-highlight (fork)
         run: |
           cargo install --git https://github.com/sicikh/mdbook-typst-highlight --branch upgrade-mdbook-0.5.2
+      # The following two steps are unnecessary, but help with debugging.
       - name: Build the preprocessor
-        # This step is unnecessary, but helps debugging.
         run: |
           cargo build --release --manifest-path ./typst-extra-docs/Cargo.toml
+          ln -s ./typst-extra-docs/target/release/typst-extra-docs ./mdbook-typst-extra-docs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mdbook-typst-extra-docs
+          path: ./mdbook-typst-extra-docs
 
       - run: just build
 

@@ -21,9 +21,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: typst-extra-docs
-      - name: Install mdbook-typst-highlight (fork)
+      - name: Install mdbook-typst-highlight (unreleased version)
         run: |
-          cargo install --git https://github.com/sicikh/mdbook-typst-highlight --branch upgrade-mdbook-0.5.2
+          cargo install --git https://github.com/sitandr/mdbook-typst-highlight --branch main
       # The following two steps are unnecessary, but help with debugging.
       - name: Build the preprocessor
         run: |

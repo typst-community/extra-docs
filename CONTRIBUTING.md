@@ -5,7 +5,7 @@
 First install [mdbook](https://rust-lang.github.io/mdBook/guide/installation.html), [uv](https://docs.astral.sh/uv/#installation), [just](https://just.systems/man/en/), and rust toolchains, then run:
 
 ```shell
-cargo install --git https://github.com/sicikh/mdbook-typst-highlight --branch upgrade-mdbook-0.5.2
+cargo install --git https://github.com/sitandr/mdbook-typst-highlight --branch main # d7c197c6, the unreleased version
 just serve --open
 ```
 

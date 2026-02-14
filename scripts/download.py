@@ -11,7 +11,8 @@ from typing import Literal
 
 import httpx
 
-src_dir = Path(__file__).parent / "src"
+src_dir = Path(__file__).parent.parent / "src"
+assert src_dir.exists() and src_dir.is_dir()
 logger = logging.getLogger(__name__)
 
 client = httpx.Client(timeout=30.0)

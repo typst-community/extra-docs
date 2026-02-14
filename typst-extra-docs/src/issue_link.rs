@@ -61,7 +61,7 @@ pub fn link_issues(
                         // Allow texts like `rpath.rs#L116-L158`.
                         if s.eat_if("#") && s.peek().is_some_and(|c| c.is_ascii_digit()) {
                             // We meet `#{num}`. Terminate before `#`.
-                            s.uneat(); 
+                            s.uneat();
                             break;
                         }
                     }

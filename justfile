@@ -29,7 +29,7 @@ rg PATTERN *ARGS:
 
 # Download book sources from GitHub (Please rerun if you meet any network error.)
 download:
-    uv run download.py
+    uv run scripts/download.py
 
 # Build the book
 build: download
@@ -39,3 +39,10 @@ build: download
 # Serve and open the book
 serve *ARGS: download
     mdbook serve {{ ARGS }}
+
+# Check latest version of packages
+[group("maintenance")]
+check-versions: download
+    @{{ if env("GITHUB_TOKEN", "") == "" { error("$GITHUB_TOKEN is required to access GitHub GraphQL API, but it is not set.") } else { "" } }}
+    node scripts/check_versions.ts
+    # 📝 Now you may update `preprocessor.typst-extra-docs.download` in `book.toml` according to the above output.

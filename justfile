@@ -46,3 +46,4 @@ check-versions: download
     @{{ if env("GITHUB_TOKEN", "") == "" { error("$GITHUB_TOKEN is required to access GitHub GraphQL API, but it is not set.") } else { "" } }}
     node scripts/check_versions.ts
     # 📝 Now you may update `preprocessor.typst-extra-docs.download` in `book.toml` according to the above output.
+    tail --lines 4 book.toml

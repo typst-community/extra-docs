@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-anyhow = "1.0.100"
+anyhow = "1.0.102"
 clap = "4.5.60"
 mdbook-markdown = "0.5.2"
 mdbook-preprocessor = "0.5.2"

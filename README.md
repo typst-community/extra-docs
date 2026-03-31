@@ -1,13 +1,19 @@
 # Typst Extra Docs
 
 [![GitHub repo size](https://img.shields.io/github/repo-size/typst-community/extra-docs)](https://github.com/typst-community/extra-docs)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Ftypst-community.github.io%2Fextra-docs%2F)](https://typst-community.github.io/extra-docs/)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Ftypst-community.github.io%2Fextra-docs%2F)][homepage]
+
+[homepage]: https://typst-community.github.io/extra-docs/
 
 This is an _unofficial_ collection of extra official documentations for Typst.
 
 - [Typst's official GitHub repositories (github.com/typst)](https://github.com/orgs/typst/repositories?type=source&q=mirror%3Afalse+fork%3Afalse+archived%3Afalse) contain some files that are missing in the official [Typst Documentation (typst.app/docs)](https://typst.app/docs/). These files are collected here to help with reading and searching.
 
+  To view these files, visit the [Typst Extra Docs website][homepage].<!-- NOTE: This line will be parsed by download.py. -->
+
 - [Snapshots of the official Typst Documentation](./src/zim/index.md) are also stored here, for reading offline or using previous versions.
+
+  To download and use them, refer to the page [Snapshots of Docs](./src/zim/index.md).
 
 ## See also
 

@@ -159,7 +159,13 @@ if __name__ == "__main__":
     versions = load_versions()
 
     (src_dir / "index.md").write_text(
-        (src_dir.parent / "README.md").read_text(encoding="utf-8").replace("](./src/", "](./"),
+        (src_dir.parent / "README.md")
+        .read_text(encoding="utf-8")
+        .replace("](./src/", "](./")
+        .replace(
+            "visit the [Typst Extra Docs website][homepage].<!-- NOTE: This line will be parsed by download.py. -->",
+            "continue browsing this website.",
+        ),
         encoding="utf-8",
     )
 

@@ -29,7 +29,7 @@ jobs:
         run: |
           cargo build --release --manifest-path ./typst-extra-docs/Cargo.toml
           ln -s ./typst-extra-docs/target/release/typst-extra-docs ./mdbook-typst-extra-docs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: mdbook-typst-extra-docs
           path: ./mdbook-typst-extra-docs

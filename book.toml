@@ -29,6 +29,6 @@ command = "cargo run --release --manifest-path ./typst-extra-docs/Cargo.toml"
 # Format: `git log -1 --format='%h %ad' --date=iso-strict`
 # `%ad` can also be obtained from GitHub API: `gh api /repos/typst/REPO/commits/COMMIT --jq .commit.author.date`
 typst = "e7256a636 2026-03-20T15:16:44+01:00"
-codex = "231b9d5 2026-03-13T12:48:30Z"
+codex = "bb28c67 2026-04-22T11:43:31Z"
 hayagriva = "a137441 2025-12-27T22:30:59Z"
 packages = "01c4ffc 2026-04-15T17:28:57Z"

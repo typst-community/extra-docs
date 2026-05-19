@@ -6,6 +6,8 @@
  * 1. Run `just download`.
  * 2. Set the `$GITHUB_TOKEN` env var. (no scope required)
  * 3. Run this script with node v24+.
+ *
+ * If `$ALLOW_EDIT_BOOK_TOML` is set to anything nonempty, then this script will edit `book.toml` if necessary.
  */
 
 import assert from "node:assert";
@@ -409,12 +411,38 @@ if (updatePlan.size === 0) {
     ),
   );
 
+  const bookTomlPath = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../book.toml",
+  );
+  let bookToml = ((env.ALLOW_EDIT_BOOK_TOML ?? "") !== "")
+    ? fs.readFileSync(bookTomlPath, { encoding: "utf-8" })
+    : null;
+
   console.log(
     "📝 If not, you may update `preprocessor.typst-extra-docs.download` in `book.toml` like this:",
   );
   for (const [repo, { latest: { commit_hash, author_date } }] of updatePlan) {
+    const suggestion = `${repo} = "${commit_hash} ${author_date}"`;
+    console.log(suggestion);
+
+    if (bookToml !== null) {
+      const old = bookToml;
+      bookToml = bookToml.replace(
+        new RegExp(`^${repo} = "[^"]+"$`, "m"),
+        suggestion,
+      );
+      assert.notEqual(
+        old,
+        bookToml,
+        `Failed to edit \`book.toml\` for ${repo}.`,
+      );
+    }
+  }
+  if (bookToml !== null) {
+    fs.writeFileSync(bookTomlPath, bookToml, { encoding: "utf-8" });
     console.log(
-      `${repo} = "${commit_hash} ${author_date}"`,
+      "☑️ `book.toml` has been edited, because `$ALLOW_EDIT_BOOK_TOML` is set.",
     );
   }
 }

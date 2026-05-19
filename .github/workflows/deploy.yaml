@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: "5 4 * * 6"
+      # At 04:05 on Saturday (UTC)
+      # https://crontab.guru/#5_4_*_*_6
 
 concurrency:
   group: pages
@@ -15,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24 # Required by `just check-versions` (which runs a `*.ts` file)
       - uses: taiki-e/install-action@v2
         with:
           tool: just, mdbook
@@ -35,6 +42,20 @@ jobs:
           path: ./mdbook-typst-extra-docs
 
       - run: just build
+      - name: Check versions
+        shell: bash
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          ALLOW_EDIT_BOOK_TOML=1 just check-versions | tee -a "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Rerun `just build` in case the versions changed
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clean -X --force src # Remove files ignored by git
+          just build
 
       - uses: actions/upload-pages-artifact@v4
         with:

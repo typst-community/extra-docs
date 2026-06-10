@@ -105,6 +105,12 @@ def download_hayagriva(repo, /) -> None:
     download(f"{repo}/docs/selectors.md", hayagriva / "selectors.md", title="Bibliography selectors")
 
     download(f"{repo}/CHANGELOG.md", hayagriva / "changelog.md", title="Changelog")
+    (hayagriva / "changelog.md").write_text(
+        # The original file contains multiple `<h1>` (0.10.0, 0.9.1, etc.).
+        # Decrease all heading levels by one and add another `<h1>`.
+        "# Changelog" + ("\n\n" + (hayagriva / "changelog.md").read_text(encoding="utf-8")).replace("\n\n#", "\n\n##"),
+        encoding="utf-8",
+    )
 
     for f in ["LICENSE-MIT", "LICENSE-APACHE", "NOTICE"]:
         legal_files.append((f"{repo}/{f}", legal_dir / "hayagriva" / f))

@@ -20,6 +20,12 @@ Kiwix is also available on other browsers, desktop computers, mobile devices, an
 
 ## See also
 
+- Official resources:
+
+  - `typst-documentation.pdf` (~700 pages) is available since Typst v0.15. You can download it from the [latest GitHub Release](https://github.com/typst/typst/releases/latest/download/typst-documentation.pdf).
+
+  - [`docs/README.md`](https://github.com/typst/typst/blob/main/docs/README.md) contains the instructions for reproducing the documentation (both the website and the PDF). It requires a [rust toolchain](https://rustup.rs) and ~7 GiB disk space.
+
 - [typst-docs-web](https://typst-docs-web.netlify.app/) hosts multiple versions of the Typst documentation, but in an alternative layout and with full-text search.
 
 - [🏗 Documentation infrastructure — Best of Typst (TCDM)](https://ydx-2147483647.github.io/best-of-typst/#docs-infra) lists more tools for building the Typst documentation.

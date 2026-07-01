@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24 # Required by `just check-versions` (which runs a `*.ts` file)
-      - uses: taiki-e/install-action@v2
+      - uses: taiki-e/install-action@v2.82.2
         with:
           tool: just, mdbook
       - uses: Swatinem/rust-cache@v2

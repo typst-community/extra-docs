@@ -4,6 +4,7 @@ This page lists _unofficial_ snapshots of the official [Typst Documentation](htt
 
 Download links:
 
+- [v0.15.1 (19 MiB, retrieved on 2026-07-20, patched)](./typst.app_docs_v0.15.1_017ca619_2026-07-20_patched.zim)
 - [v0.15.0 (19 MiB, retrieved on 2026-06-20, patched)](./typst.app_docs_v0.15.0_ba0bcdfb_2026-06-20_patched.zim)
 - [v0.14.2 (16 MiB, retrieved on 2025-12-19)](./typst.app_docs_v0.14.2_b1dfeb16-2025-12-19.zim)
 - [v0.14.1 (16 MiB, retrieved on 2025-12-10)](./typst.app_docs_v0.14.1_d825dd38-2025-12-10.zim)

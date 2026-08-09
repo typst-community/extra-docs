@@ -1,0 +1,53 @@
+name: Check
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv tool install ruff
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: just
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: typst-extra-docs
+
+      - run: just fmt
+      - run: git diff --exit-code
+
+      - run: just check
+      - run: just test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: just, mdbook
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: typst-extra-docs
+      - name: Install mdbook-typst-highlight (unreleased version)
+        run: |
+          cargo install --git https://github.com/sitandr/mdbook-typst-highlight --branch main
+      # The following two steps are unnecessary, but help with debugging.
+      - name: Build the preprocessor
+        run: |
+          cargo build --release --manifest-path ./typst-extra-docs/Cargo.toml
+          ln -s ./typst-extra-docs/target/release/typst-extra-docs ./mdbook-typst-extra-docs
+      - uses: actions/upload-artifact@v7
+        with:
+          name: mdbook-typst-extra-docs
+          path: ./mdbook-typst-extra-docs
+
+      - run: just build

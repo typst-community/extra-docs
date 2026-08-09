@@ -82,7 +82,7 @@ def repackage(src_path: Path, dst_path: Path, /) -> None:
             override_content = None
             if entry.path.endswith(".svg"):
                 content = bytes(entry.get_item().content)
-                if not (content.startswith(b"<svg ") or content.startswith(b"<?xml ")):
+                if not content.startswith((b"<svg ", b"<?xml ")):
                     print(f"💔 Found broken SVG: {entry.path = }, {content[:10] = }, {len(content) = }")
                     assert entry.path.startswith("typst.app/assets/icons") or entry.path in {
                         "typst.app/assets/images/typst.svg",

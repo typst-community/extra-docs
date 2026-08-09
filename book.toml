@@ -12,6 +12,11 @@ language = "en"
 # hayagriva/index.md contains rust codes, but the Rust Playground does not support the hayagriva crate
 runnable = false
 
+[preprocessor.clean-pulldown-cmark]
+command = "uv run scripts/clean_pulldown_cmark.py"
+# After all other preprocessors.
+after = ["typst-highlight", "typst-extra-docs"]
+
 [preprocessor.typst-highlight]
 # Install it by running
 #   cargo install --git https://github.com/sitandr/mdbook-typst-highlight --branch main

@@ -35,5 +35,5 @@ command = "cargo run --release --manifest-path ./typst-extra-docs/Cargo.toml"
 # `%ad` can also be obtained from GitHub API: `gh api /repos/typst/REPO/commits/COMMIT --jq .commit.author.date`
 typst = "a51e02804 2026-08-07T15:01:39+02:00"
 codex = "930ec5c 2026-07-09T13:15:58Z"
-hayagriva = "5a71313 2026-07-15T10:21:09+02:00"
+hayagriva = "546c7c7 2026-09-26T14:28:15-04:00"
 packages = "8aa59a2 2026-08-11T08:46:57Z"
